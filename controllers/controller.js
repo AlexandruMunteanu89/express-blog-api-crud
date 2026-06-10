@@ -4,11 +4,11 @@ const posts = require("../data/posts");
 // elenco funzioni relative alle rotte della risorsa post
 
 const index = (req, res) => {
-    const tag = req.query.tag;
+    const tags = req.query.tags;
 
-    if (tag) {
+    if (tags) {
         //
-        const filteredPosts = posts.filter(post => post.tag.includes(tag));
+        const filteredPosts = posts.filter(post => post.tags.includes(tags));
         return res.json(filteredPosts);
     }
     res.json(posts);
@@ -30,6 +30,23 @@ const show = (req, res) => {
 
     res.json(singlePost);
     
+}
+
+
+// Store una nuova Post
+const store = (req, res) => {
+    console.log(req.body);
+    res.json({ message: 'Store a new post'});
+}
+
+//Modifica integrale post
+const update = (req, res) => {
+    res.json({ message: 'Modifica integrale post'})
+}
+
+//Modifica parziale del post
+const modify = (req, res) => {
+    res.json({ message: 'Modifica parziale del post'})
 }
 
 const destroy = (req, res) => {
@@ -60,4 +77,4 @@ const destroy = (req, res) => {
     
 }
 
-module.exports = {index, show, destroy};
+module.exports = {index, show, store, update, modify, destroy};
