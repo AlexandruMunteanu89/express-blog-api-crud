@@ -36,9 +36,26 @@ const show = (req, res) => {
 // Store una nuova Post
 const store = (req, res) => {
     console.log(req.body);
-    res.json({ message: 'Store a new post'});
-}
+    //res.json({ message: 'Store a new post'});
 
+// Creiamo un nuovo id incrementando l'ultimo id presente
+const newId = posts[posts.length - 1].id + 1;
+// Creiamo un nuovo post
+const newPost = {
+    id: newId,
+    title: req.body.title,
+    content: req.body.content,
+    image: req.body.image,
+    tags: req.body.tags,
+  }
+    // Aggiungiamo il nuovo post
+    posts.push(newPost);
+
+    console.log(posts);
+    
+    // Restituiamo lo status corretto e il post creato
+    res.status(201).json(newPost);
+}
 //Modifica integrale post
 const update = (req, res) => {
     res.json({ message: 'Modifica integrale post'})
