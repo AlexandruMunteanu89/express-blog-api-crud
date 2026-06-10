@@ -58,7 +58,31 @@ const newPost = {
 }
 //Modifica integrale post
 const update = (req, res) => {
-    res.json({ message: 'Modifica integrale post'})
+    //res.json({ message: 'Modifica integrale post'})
+    // recuperiamo l'id dall' URL e trasformiamolo in numero
+  const id = parseInt(req.params.id)
+ 
+  // cerchiamo il pizza tramite id
+  const post = posts.find(post => post.id === id);
+  if (!post) {
+        res.status(404);
+ 
+        return res.json({
+        error: "Not Found",
+        message: "Post non trovata"
+        })
+    }
+    // Aggiorniamo il post
+    post.title = req.body.title;
+    post.content = req.body.content;
+    post.image = req.body.image;
+    post.tags = req.body.tags;
+
+    // Controlliamo
+    console.log(posts);
+
+    // Restituiamo il post creato
+    res.json(post);
 }
 
 //Modifica parziale del post
