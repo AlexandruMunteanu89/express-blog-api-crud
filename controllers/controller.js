@@ -87,7 +87,34 @@ const update = (req, res) => {
 
 //Modifica parziale del post
 const modify = (req, res) => {
-    res.json({ message: 'Modifica parziale del post'})
+    //res.json({ message: 'Modifica parziale del post'})
+    // Recuperiamo l'id
+    const id = parseInt(req.params.id)
+
+    const post = posts.find(post => post.id === id);
+
+     if(!post) {
+        //res.status(404);
+
+        return res.status(404).json({
+            error: "Not Found",
+            message: "Post non trovato"
+        })
+    }
+
+    const modifyPost = req.body;
+
+    //Aggiorniamo il post
+    post.title = modifyPost.title ?? post.title;
+    post.content = modifyPost.content ?? post.content;
+    post.image = modifyPost.image ?? post.image;
+    post.tags = modifyPost.tags ?? post.tags;
+
+    // Controlliamo il post
+    console.log(posts);
+    //Restituiamo il post creato
+    res.json(post);
+    
 }
 
 const destroy = (req, res) => {
