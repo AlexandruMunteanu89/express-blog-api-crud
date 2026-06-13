@@ -4,9 +4,15 @@ const port = 3000;
 // Importo routerPosts
 const routerPosts = require('./routers/routerPosts');
 
+// importo middleware di checkTime
+const checkTime = require(".middlewares/checkTime");
+
 app.use(express.json());
 //register the static assest
 app.use(express.static('public'))
+
+// registra globalmente il middleware di gestione
+app.use(checkTime);
 
 
 // Create the first route (home)
