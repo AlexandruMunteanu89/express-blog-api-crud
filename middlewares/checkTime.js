@@ -7,7 +7,5 @@ function checkTime(req, res, next) {
 
     // soluzione della richiesta
     next();
-
-module.exports = checkTime;
-    
 }
+module.exports = checkTime;

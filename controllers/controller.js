@@ -7,10 +7,13 @@ const index = (req, res) => {
     const tags = req.query.tags;
 
     if (tags) {
-        //
+        // filtraggio
         const filteredPosts = posts.filter(post => post.tags.includes(tags));
         return res.json(filteredPosts);
     }
+
+    // funzione per bloccare rotta index e attivare middleware errorsHandler
+    funy.ciao();
     res.json(posts);
 }
 
