@@ -10,6 +10,9 @@ const checkTime = require("./middlewares/checkTime");
 // importo middleware di gestione errore interni server 500
 const errorsHandler = require('./middlewares/errorsHandler');
 
+// importo middleware di gestione errore di chiamata su rotta inesistente 404
+const notFound = require('./middlewares/notFound');
+
 app.use(express.json());
 //register the static assest
 app.use(express.static('public'))
@@ -25,9 +28,13 @@ app.get('/', (req, res) => {
 
 // rotte di CRUD
 app.use('/posts', routerPosts);
+// registra globalmente il middleware di gestione chiamata su rotta inesistente 404
+app.use(notFound);
 
 // registra il middleware di gestione errore interno server 500
 app.use(errorsHandler);
+
+
 
 //Start the server lsitener
 app.listen(port, () => {

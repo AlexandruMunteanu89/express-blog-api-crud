@@ -14,6 +14,8 @@ const index = (req, res) => {
 
     // funzione per bloccare rotta index e attivare middleware errorsHandler
     funy.ciao();
+
+    // risponde con la lista posts
     res.json(posts);
 }
 
